@@ -176,27 +176,27 @@
   </div>
 </footer>
 
-<div class="modal" id="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lm-title">
+<dialog class="modal" id="lead-modal" aria-labelledby="lm-title">
   <div class="modal__back" data-modal-close></div>
   <div class="modal__box">
     <button class="modal__close" data-modal-close aria-label="Закрыть">&times;</button>
     <h3 id="lm-title">Обсудить проект</h3>
     <p class="sub">Расскажите о задаче, вернёмся с планом и оценкой в течение рабочего дня.</p>
     <form data-lead-form>
-      <label>Имя</label>
-      <input type="text" name="name" required placeholder="Как к вам обращаться">
-      <label>Телефон или Telegram</label>
-      <input type="text" name="phone" required placeholder="+7 ___ ___-__-__ или @ник">
-      <label>Месячный бюджет на трафик</label>
-      <select name="budget">
+      <label for="lm-name">Имя</label>
+      <input id="lm-name" autofocus type="text" name="name" required placeholder="Как к вам обращаться">
+      <label for="lm-phone">Телефон или Telegram</label>
+      <input id="lm-phone" type="text" name="phone" required placeholder="+7 ___ ___-__-__ или @ник">
+      <label for="lm-budget">Месячный бюджет на трафик</label>
+      <select id="lm-budget" name="budget">
         <option>До 150 тысяч</option>
         <option>150–500 тысяч</option>
         <option>500 тысяч – 1,5 млн</option>
         <option>Больше 1,5 млн</option>
         <option>Бюджета ещё нет, нужен расчёт</option>
       </select>
-      <label>Задача</label>
-      <textarea name="msg" placeholder="Ниша, что продаёте, что сейчас с рекламой"></textarea>
+      <label for="lm-msg">Задача</label>
+      <textarea id="lm-msg" name="msg" placeholder="Ниша, что продаёте, что сейчас с рекламой"></textarea>
       <button class="send" type="submit">Отправить</button>
       <p class="fine">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</p>
       <p class="fine"><strong>Демонстрационный проект из портфолио.</strong> Агентство «Сигнал», его кейсы и клиенты вымышлены, форма заявку никуда не отправляет. Связаться с автором сайта: <a href="https://shulgin.is-a.dev">shulgin.is-a.dev</a></p>
@@ -207,7 +207,7 @@
       <p class="sub">Ответим в течение рабочего дня.</p>
     </div>
   </div>
-</div>
+</dialog>
 
 <script src="app.js"></script>
 </body>

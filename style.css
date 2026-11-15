@@ -226,18 +226,22 @@ section.blk + section.blk { border-top: 0; background-image: linear-gradient(90d
 .next-case .arr { font-size: 36px; color: var(--acid); flex: none; }
 
 /* modal (dark) */
-.modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
-.modal.open { display: flex; }
+.modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px;
+  /* native <dialog> reset: full-viewport transparent shell, the backdrop and box are the existing children */
+  width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0; background: transparent; color: inherit; overflow: visible; }
+.modal[open] { display: flex; }
+.modal::backdrop { background: transparent; }
+.modal:modal { overscroll-behavior: contain; }
 .modal__back { position: absolute; inset: 0; background: rgb(0 0 0 / .7); backdrop-filter: blur(5px); }
 .modal__box {
   position: relative; background: var(--bg-raise); border: 1px solid var(--line);
   width: 470px; max-width: 100%; padding: 38px; max-height: 92vh; overflow: auto;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .modal.open .modal__box { animation: modalIn .35s cubic-bezier(.16,1,.3,1); }
+  .modal[open] .modal__box { animation: modalIn .35s cubic-bezier(.16,1,.3,1); }
 }
 @keyframes modalIn { from { opacity: 0; transform: translateY(26px) scale(.98); } }
-.modal__close { position: absolute; top: 12px; right: 16px; border: 0; background: none; font-size: 28px; cursor: pointer; color: var(--ink-soft); line-height: 1; }
+.modal__close { position: absolute; top: 4px; right: 8px; width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: none; font-size: 28px; cursor: pointer; color: var(--ink-soft); line-height: 1; }
 .modal__close:hover { color: var(--ink); }
 .modal h3 { font-size: 22px; text-transform: uppercase; margin-bottom: 6px; }
 .modal .sub { color: var(--ink-soft); font-size: 15px; margin-bottom: 20px; }
@@ -334,7 +338,14 @@ body::before {
 .work-card:hover .work-card__body::after { opacity: 1; transform: none; }
 
 @media (max-width: 880px) {
-  .nav { display: none; }
+  /* the nav stays reachable on phones: logo + CTA on row one, the three links on row two (a 44 px tap row) */
+  .head .wrap { height: auto; padding-top: 8px; flex-wrap: wrap; row-gap: 0; }
+  .nav { order: 3; flex: 0 0 100%; gap: 20px; }
+  .nav a { display: flex; align-items: center; min-height: 44px; }
+  .cta-mini { display: inline-flex; align-items: center; min-height: 44px; }
+  .logo { padding: 9px 0; margin: -9px 0; }
+  .crumbs a { display: inline-block; padding: 14px 0; margin: -14px 0; }
+  .foot .cols a { padding: 11px 0; }
   .works-grid, .steps, .work-body, .tst, .strip .wrap { grid-template-columns: 1fr; }
   .foot .cols { grid-template-columns: 1fr; gap: 26px; padding: 40px 24px 28px; }
   .strip img { height: 240px; }

@@ -99,28 +99,19 @@
   // lead modal
   var modal = document.getElementById('lead-modal');
   if (modal) {
-    var lastFocus = null;
+    // native <dialog>: showModal() gives the focus trap, inert page, Esc and focus return to the opener
     function openModal(e) {
       if (e) e.preventDefault();
-      lastFocus = document.activeElement;
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      var first = modal.querySelector('input');
-      if (first) first.focus();
+      if (!modal.open) modal.showModal();
     }
     function closeModal() {
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
-      if (lastFocus) lastFocus.focus();
+      if (modal.open) modal.close();
     }
     document.querySelectorAll('[data-modal-open]').forEach(function (el) {
       el.addEventListener('click', openModal);
     });
     modal.querySelectorAll('[data-modal-close]').forEach(function (el) {
       el.addEventListener('click', closeModal);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
     var form = modal.querySelector('[data-lead-form]');
     if (form) form.addEventListener('submit', function (e) {
